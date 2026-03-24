@@ -38,3 +38,8 @@ next-env.d.ts
 out/
 .env
 build
+
+# rendered video output
+public/*.mp4
+public/*.mov
+public/*.webm
