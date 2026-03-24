@@ -1,4 +1,8 @@
-import { fontFamily, loadFont } from '@remotion/google-fonts/Inter';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/inter/800.css';
+import '@fontsource/inter/900.css';
 import { AbsoluteFill, Sequence } from 'remotion';
 import { Background } from './Background';
 import { Scene1 } from './Scene1';
@@ -6,9 +10,9 @@ import { Scene2 } from './Scene2';
 import { Scene3 } from './Scene3';
 import { Scene4 } from './Scene4';
 
-loadFont('normal', { subsets: ['latin'], weights: ['400', '600', '700', '800', '900'] });
+const fontFamily = 'Inter, sans-serif';
 
-// 30 seconds × 30fps = 900 frames total
+// 30 seconds x 30fps = 900 frames total
 // Scenes overlap ~30 frames for cross-fade transitions
 const S1_START = 0;   const S1_DUR = 270;
 const S2_START = 240; const S2_DUR = 260;
