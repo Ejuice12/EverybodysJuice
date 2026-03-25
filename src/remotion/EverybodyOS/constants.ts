@@ -1,24 +1,32 @@
+import React from 'react';
+
 export const COLORS = {
-  bg: '#07070e',
-  teal: '#00e5c0',
-  tealDim: 'rgba(0, 229, 192, 0.12)',
-  purple: '#8b5cf6',
-  purpleDim: 'rgba(139, 92, 246, 0.15)',
-  pink: '#f472b6',
-  white: '#ffffff',
-  subtext: 'rgba(255,255,255,0.55)',
-  dimtext: 'rgba(255,255,255,0.28)',
-  card: 'rgba(255,255,255,0.04)',
-  border: 'rgba(255,255,255,0.09)',
+  bg: '#000000',
+  orangeFrom: '#FF6B00',
+  orangeTo: '#FFB347',
+  glassBg: 'rgba(255, 255, 255, 0.05)',
+  glassBorder: 'rgba(255, 255, 255, 0.15)',
+  textPrimary: '#FFFFFF',
+  textSecondary: 'rgba(255,255,255,0.6)',
+} as const;
+
+export const ORANGE_GRADIENT = 'linear-gradient(135deg, #FF6B00, #FFB347)';
+
+export const GLASS_STYLE: React.CSSProperties = {
+  background: 'rgba(255, 255, 255, 0.05)',
+  backdropFilter: 'blur(12px)',
+  WebkitBackdropFilter: 'blur(12px)',
+  border: '1px solid rgba(255, 255, 255, 0.15)',
+  boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.3)',
+  borderRadius: 24,
 };
 
-export const SYMPTOM_COLORS = {
-  sleep: '#60a5fa',
-  stress: '#f87171',
-  energy: '#fbbf24',
-  mood: '#a78bfa',
-  focus: '#34d399',
-  drive: '#f472b6',
-  anxiety: '#fb923c',
-  recovery: '#22d3ee',
+export const ORANGE_TEXT_STYLE: React.CSSProperties = {
+  background: 'linear-gradient(135deg, #FF6B00, #FFB347)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text',
 };
+
+// NB International font family string — use everywhere
+export const NB = "'NB International', sans-serif";

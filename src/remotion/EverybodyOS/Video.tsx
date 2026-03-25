@@ -1,30 +1,55 @@
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/600.css';
-import '@fontsource/inter/700.css';
-import '@fontsource/inter/800.css';
-import '@fontsource/inter/900.css';
-import { AbsoluteFill, Sequence } from 'remotion';
-import { Background } from './Background';
-import { Scene1 } from './Scene1';
-import { Scene2 } from './Scene2';
-import { Scene3 } from './Scene3';
-import { Scene4 } from './Scene4';
+import React, { useEffect, useState } from 'react';
+import { AbsoluteFill, Sequence, continueRender, delayRender, staticFile } from 'remotion';
+import { NB } from './constants';
+import { Act1 } from './Act1';
+import { Act2 } from './Act2';
+import { Act3 } from './Act3';
+import { Act4 } from './Act4';
 
-const fontFamily = 'Inter, sans-serif';
+// 35 seconds × 30 fps = 1050 frames
+// ACT 1 : frames   0 – 149   (5 s)   "The Illusion of Normal"
+// ACT 2 : frames 150 – 449  (10 s)   "Tearing Down the System"
+// ACT 3 : frames 450 – 749  (10 s)   "The 1% Standard"
+// ACT 4 : frames 750 – 1049 (10 s)   "Transcendence"
 
-// 30 seconds x 30fps = 900 frames total
-// Scenes overlap ~30 frames for cross-fade transitions
-const S1_START = 0;   const S1_DUR = 270;
-const S2_START = 240; const S2_DUR = 260;
-const S3_START = 468; const S3_DUR = 235;
-const S4_START = 672; const S4_DUR = 228;
+const FONT_CSS = `
+@font-face {
+  font-family: 'NB International';
+  src: url('${staticFile('NBInternational.otf')}') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+`;
 
-export const EverybodyOSVideo: React.FC = () => (
-  <AbsoluteFill style={{ fontFamily }}>
-    <Background />
-    <Sequence from={S1_START} durationInFrames={S1_DUR}><Scene1 durationInFrames={S1_DUR} /></Sequence>
-    <Sequence from={S2_START} durationInFrames={S2_DUR}><Scene2 durationInFrames={S2_DUR} /></Sequence>
-    <Sequence from={S3_START} durationInFrames={S3_DUR}><Scene3 durationInFrames={S3_DUR} /></Sequence>
-    <Sequence from={S4_START} durationInFrames={S4_DUR}><Scene4 durationInFrames={S4_DUR} /></Sequence>
-  </AbsoluteFill>
-);
+export const EverybodyOSVideo: React.FC = () => {
+  const [fontHandle] = useState(() => delayRender('Loading NB International font'));
+
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = FONT_CSS;
+    document.head.appendChild(style);
+
+    document.fonts
+      .load("1em 'NB International'")
+      .then(() => continueRender(fontHandle))
+      .catch(() => continueRender(fontHandle));
+
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, [fontHandle]);
+
+  return (
+    <AbsoluteFill
+      style={{
+        background: '#000000',
+        fontFamily: NB,
+      }}
+    >
+      <Sequence from={0}   durationInFrames={150}><Act1 /></Sequence>
+      <Sequence from={150} durationInFrames={300}><Act2 /></Sequence>
+      <Sequence from={450} durationInFrames={300}><Act3 /></Sequence>
+      <Sequence from={750} durationInFrames={300}><Act4 /></Sequence>
+    </AbsoluteFill>
+  );
+};
