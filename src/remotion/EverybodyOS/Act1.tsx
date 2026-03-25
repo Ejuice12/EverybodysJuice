@@ -253,7 +253,7 @@ export const Act1: React.FC = () => {
                     </div>
                     <div
                       style={{
-                        color: 'rgba(255,255,255,0.5)',
+                        color: 'rgba(255,255,255,0.6)',
                         fontSize: 26,
                         fontFamily: NB,
                       }}
@@ -278,7 +278,7 @@ export const Act1: React.FC = () => {
                 style={{
                   width: `${72 + Math.sin(frame * 0.1) * 3}%`,
                   height: '100%',
-                  background: 'linear-gradient(90deg, #FF6B00, #FFB347)',
+                  background: 'linear-gradient(135deg, #FF6B00, #FFB347)',
                   borderRadius: 4,
                 }}
               />
