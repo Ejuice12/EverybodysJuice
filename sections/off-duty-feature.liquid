@@ -1,0 +1,294 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+.off-duty-feature {
+  background: #000000;
+  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.off-duty-feature__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.off-duty-feature__label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: #C9A84C;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.off-duty-feature__photo-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.off-duty-feature__frame {
+  border: 3px solid rgba(201, 168, 76, 0.4);
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+.off-duty-feature__frame img.main-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.off-duty-feature__badge {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: #C9A84C;
+  color: #1A0A2E;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 4px;
+  line-height: 1.3;
+  text-align: center;
+}
+.off-duty-feature__sticker {
+  position: absolute;
+  object-fit: contain;
+  z-index: 10;
+}
+.off-duty-feature__sticker--left {
+  width: 130px;
+  height: 130px;
+  top: -20px;
+  left: -50px;
+  transform: rotate(-15deg);
+  animation: ebjFloatLeft 3s ease-in-out infinite;
+}
+.off-duty-feature__sticker--right {
+  width: 110px;
+  height: 110px;
+  bottom: 40px;
+  right: -50px;
+  transform: rotate(12deg);
+  animation: ebjFloatRight 3.5s ease-in-out infinite;
+}
+@keyframes ebjFloatLeft {
+  0%, 100% { transform: rotate(-15deg) translateY(0px); }
+  50% { transform: rotate(-15deg) translateY(-10px); }
+}
+@keyframes ebjFloatRight {
+  0%, 100% { transform: rotate(12deg) translateY(0px); }
+  50% { transform: rotate(12deg) translateY(-8px); }
+}
+.off-duty-feature__callouts {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  align-items: stretch;
+  background: #0d0d0d;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+.off-duty-feature__callout {
+  flex: 1;
+  padding: 16px 12px;
+  text-align: center;
+  position: relative;
+}
+.off-duty-feature__callout + .off-duty-feature__callout {
+  border-left: 1px solid rgba(201, 168, 76, 0.25);
+}
+.off-duty-feature__callout-icon {
+  display: block;
+  width: 20px;
+  height: 4px;
+  background: #C9A84C;
+  margin: 0 auto 8px;
+  border-radius: 2px;
+}
+.off-duty-feature__callout-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  margin: 0;
+}
+.off-duty-feature__cta-wrap {
+  margin-top: 32px;
+  text-align: center;
+}
+.off-duty-feature__cta {
+  display: inline-block;
+  background: #C9A84C;
+  color: #1A0A2E;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  padding: 16px 40px;
+  border-radius: 8px;
+}
+@media (min-width: 768px) {
+  .off-duty-feature { padding: 80px 40px; }
+  .off-duty-feature__photo-wrap { max-width: 600px; }
+  .off-duty-feature__callouts { max-width: 600px; }
+  .off-duty-feature__sticker--left { width: 160px; height: 160px; left: -70px; top: -30px; }
+  .off-duty-feature__sticker--right { width: 140px; height: 140px; right: -70px; bottom: 60px; }
+}
+</style>
+
+<section class="off-duty-feature">
+  <div class="off-duty-feature__inner">
+
+    <p class="off-duty-feature__label">{{ section.settings.label }}</p>
+
+    <div class="off-duty-feature__photo-wrap">
+
+      {% if section.settings.sticker_image != blank %}
+        <img
+          class="off-duty-feature__sticker off-duty-feature__sticker--left"
+          src="{{ section.settings.sticker_image | image_url: width: 300 }}"
+          alt="Off-Duty Gummy"
+          width="130"
+          height="130"
+          loading="lazy"
+        >
+      {% endif %}
+
+      <div class="off-duty-feature__frame">
+        {% if section.settings.main_image != blank %}
+          <img
+            class="main-photo"
+            src="{{ section.settings.main_image | image_url: width: 800 }}"
+            alt="Off-Duty Gummies"
+            width="800"
+            height="800"
+            loading="lazy"
+          >
+        {% endif %}
+        {% if section.settings.badge_text != blank %}
+          <div class="off-duty-feature__badge">{{ section.settings.badge_text }}</div>
+        {% endif %}
+      </div>
+
+      {% if section.settings.sticker_image != blank %}
+        <img
+          class="off-duty-feature__sticker off-duty-feature__sticker--right"
+          src="{{ section.settings.sticker_image | image_url: width: 300 }}"
+          alt="Off-Duty Gummy"
+          width="110"
+          height="110"
+          loading="lazy"
+        >
+      {% endif %}
+
+    </div>
+
+    <div class="off-duty-feature__callouts">
+      <div class="off-duty-feature__callout">
+        <span class="off-duty-feature__callout-icon"></span>
+        <p class="off-duty-feature__callout-text">{{ section.settings.callout_1 }}</p>
+      </div>
+      <div class="off-duty-feature__callout">
+        <span class="off-duty-feature__callout-icon"></span>
+        <p class="off-duty-feature__callout-text">{{ section.settings.callout_2 }}</p>
+      </div>
+      <div class="off-duty-feature__callout">
+        <span class="off-duty-feature__callout-icon"></span>
+        <p class="off-duty-feature__callout-text">{{ section.settings.callout_3 }}</p>
+      </div>
+    </div>
+
+    <div class="off-duty-feature__cta-wrap">
+      {% if section.settings.cta_url != blank %}
+        <a href="{{ section.settings.cta_url }}" class="off-duty-feature__cta">{{ section.settings.cta_text }}</a>
+      {% else %}
+        <a href="/products/off-duty-gummies" class="off-duty-feature__cta">{{ section.settings.cta_text }}</a>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Off-Duty Feature",
+  "tag": "section",
+  "class": "off-duty-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Eyebrow Label",
+      "default": "Wind Down Without Shutting Down"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "sticker_image",
+      "label": "Gummy Sticker PNG"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text on Photo",
+      "default": "OFF-DUTY IS ON."
+    },
+    {
+      "type": "text",
+      "id": "callout_1",
+      "label": "Callout 1",
+      "default": "Calm Without Crashing"
+    },
+    {
+      "type": "text",
+      "id": "callout_2",
+      "label": "Callout 2",
+      "default": "Blackberry Flavor"
+    },
+    {
+      "type": "text",
+      "id": "callout_3",
+      "label": "Callout 3",
+      "default": "Vegan and Gluten Free"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button Text",
+      "default": "Get Some Rest"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Off-Duty Feature"
+    }
+  ]
+}
+{% endschema %}
